@@ -1,0 +1,163 @@
+/* ============================================================
+   bslibHL — feuille de styles
+   ============================================================
+
+   PERSONNALISATION DES COULEURS
+   ─────────────────────────────
+   Les couleurs de la sidebar sont définies via des variables CSS.
+   Pour les modifier, surcharger les variables dans votre app :
+
+     tags$style(":root {
+       --hl-nav-bg:     #e74c3c;   /* boutons principaux  */
+       --hl-nav-sub-bg: #4a1010;   /* sous-items          */
+     }")
+
+   Ou via le paramètre nav_bg / nav_sub_bg de page_sidebarHL().
+
+   Niveau 1 (automatique) : --hl-nav-bg suit var(--bs-primary) du thème bslib.
+   Niveau 2 (variables CSS) : surcharger les variables ci-dessous.
+   Niveau 3 (paramètres R) : nav_bg / nav_sub_bg dans page_sidebarHL().
+   ============================================================ */
+
+/* ── Variables CSS — valeurs par défaut ──────────────────── */
+:root {
+  /* Boutons principaux — valeur par défaut fiable.
+     Le suivi automatique du thème bslib est géré côté R
+     (bslib::bs_get_variables) et injecté ici si un thème est fourni. */
+  --hl-nav-bg:     #3c8dbc;
+
+  /* Sous-items : bleu foncé avec texte bleu clair */
+  --hl-nav-sub-bg: rgba(10, 40, 75, 0.70);
+}
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+
+.hl-sidebar > .sidebar-content {
+  padding: 0.5rem 0;
+}
+
+/* Bouton nav de base
+   Ancré sous .hl-sidebar pour avoir priorité sur les règles bslib */
+.hl-sidebar .hl-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.55rem 1rem;
+  background: var(--hl-nav-bg) !important;
+  border: none;
+  color: white !important;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  transition: filter 0.15s;
+  border-radius: 4px;
+}
+
+/* hover / active : assombrir automatiquement, quelle que soit la couleur */
+.hl-sidebar .hl-nav-btn:hover {
+  filter: brightness(0.88);
+}
+
+.hl-sidebar .hl-nav-btn.active {
+  filter: brightness(0.80);
+  font-weight: 500;
+}
+
+/* ── Groupe collapsible ──────────────────────────────────── */
+
+.hl-sidebar .hl-nav-group-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.55rem 1rem;
+  background: var(--hl-nav-bg) !important;
+  border: none;
+  color: white !important;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  transition: filter 0.15s;
+  border-radius: 4px;
+}
+
+.hl-sidebar .hl-nav-group-btn:hover {
+  filter: brightness(0.88);
+}
+
+.hl-sidebar .hl-nav-group-btn.has-active-child {
+  filter: brightness(0.80);
+}
+
+/* Flèche de toggle */
+.hl-nav-group-arrow {
+  margin-left: auto;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.hl-nav-group-btn.expanded .hl-nav-group-arrow {
+  transform: rotate(180deg);
+}
+
+/* Enfants : fond semi-transparent + bordure pour la délimitation.
+   Approche rgba() : fonctionne sur n'importe quelle couleur de sidebar,
+   toujours plus foncé que le fond sans dépendre d'une couleur fixe.
+   --hl-nav-sub-bg peut être surchargé pour un fond plein si désiré. */
+.hl-sidebar .hl-nav-group-children {
+  padding-left: 0.5rem;
+  overflow: hidden;
+}
+
+.hl-sidebar .hl-nav-group-children .hl-nav-btn {
+  background: var(--hl-nav-sub-bg) !important;
+  border: 1px solid var(--hl-nav-sub-border, rgba(80, 150, 220, 0.30)) !important;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  color: #78b8e8 !important;
+}
+
+.hl-sidebar .hl-nav-group-children .hl-nav-btn:hover {
+  background: rgba(20, 70, 130, 0.75) !important;
+  border-color: rgba(100, 170, 240, 0.50) !important;
+  color: #a8d4f5 !important;
+  filter: none;
+}
+
+.hl-sidebar .hl-nav-group-children .hl-nav-btn.active {
+  background: rgba(20, 70, 130, 0.75) !important;
+  border-color: rgba(100, 170, 240, 0.50) !important;
+  color: #a8d4f5 !important;
+  font-weight: 500;
+  filter: none;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+
+.hl-header-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.hl-header-title {
+  flex: 1 1 auto;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hl-header-items {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
