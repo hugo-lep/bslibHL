@@ -12,3 +12,5 @@ Imports:
     bslib,
     htmltools,
     shiny
+URL: https://github.com/hugo-lep/bslibHL
+BugReports: https://github.com/hugo-lep/bslibHL/issues
