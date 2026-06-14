@@ -139,10 +139,21 @@
 
 /* ── Fill propagation dans navset_hidden ─────────────────── */
 
-/* Le .tab-content de navset_hidden est marqué fill via bindFillRole() en R,
-   mais les .tab-pane internes ne le sont pas — on les force ici via l'ID
-   fixe #hl__content que bslibHL contrôle. */
-#hl__content > .tab-pane.active {
+/* bindFillRole() ajoute html-fill-container/html-fill-item sur div.tabbable,
+   mais pas sur div.tab-content ni sur les .tab-pane internes — on complète
+   la chaîne ici. #hl__content est la <ul> nav cachée, PAS le .tab-content,
+   donc les sélecteurs partent du div.tabbable. */
+
+/* 1. .tab-content doit remplir le .tabbable et devenir flex container */
+.tabbable.html-fill-container > .tab-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* 2. le .tab-pane actif remplit le .tab-content et gère son propre scroll */
+.tabbable.html-fill-container > .tab-content > .tab-pane.active {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
@@ -150,7 +161,10 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
-#hl__content > .tab-pane.active > .html-fill-item {
+
+/* 3. les enfants html-fill-item du .tab-pane remplissent leur parent
+      (bslib ne l'active que si le parent a la classe html-fill-container) */
+.tabbable.html-fill-container > .tab-content > .tab-pane.active > .html-fill-item {
   flex: 1 1 auto;
   min-height: 0;
 }
