@@ -81,14 +81,22 @@ build_nav_panels <- function(nav_items) {
       panels[[length(panels) + 1L]] <- bslib::nav_panel(
         title = item$title,
         value = item$value,
-        do.call(htmltools::tagList, item$content)
+        htmltools::div(
+          class = "html-fill-container html-fill-item",
+          style = "height: 100%; overflow-y: auto;",
+          do.call(htmltools::tagList, item$content)
+        )
       )
     } else if (inherits(item, "hl_nav_group")) {
       for (child in item$children) {
         panels[[length(panels) + 1L]] <- bslib::nav_panel(
           title = child$title,
           value = child$value,
-          do.call(htmltools::tagList, child$content)
+          htmltools::div(
+            class = "html-fill-container html-fill-item",
+            style = "height: 100%; overflow-y: auto;",
+            do.call(htmltools::tagList, child$content)
+          )
         )
       }
     }

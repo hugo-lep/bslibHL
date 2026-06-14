@@ -7,3 +7,5 @@ document()
 check()
 
 renv::install("bsicons")
+
+use_github()

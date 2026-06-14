@@ -41,10 +41,17 @@
 page_sidebarHL_server <- function(session = shiny::getDefaultReactiveDomain()) {
 
   # ── Routing : clic sidebar → nav_select() ─────────────────────────────────
+  #
+  # session est passé explicitement à nav_select() pour éviter un problème de
+  # domaine réactif. Sans ça, getDefaultReactiveDomain() peut retourner une
+  # mauvaise session quand page_sidebarHL_server() est appelé depuis un contexte
+  # réactif imbriqué (ex. observeEvent(user_auth(), {...}) dans protegR2_server).
   shiny::observeEvent(
     session$input[["hl__nav"]],
     {
-      bslib::nav_select("hl__content", selected = session$input[["hl__nav"]])
+      bslib::nav_select("hl__content",
+                        selected = session$input[["hl__nav"]],
+                        session  = session)
     },
     ignoreInit = TRUE
   )
@@ -94,7 +101,7 @@ page_sidebarHL_server <- function(session = shiny::getDefaultReactiveDomain()) {
 #'
 #' @export
 hl_nav_select <- function(value, session = shiny::getDefaultReactiveDomain()) {
-  bslib::nav_select("hl__content", selected = value)
+  bslib::nav_select("hl__content", selected = value, session = session)
   session$sendCustomMessage("hl_set_active", list(value = value))
   shiny::updateQueryString(
     paste0("?page=", value),
