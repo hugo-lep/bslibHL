@@ -137,6 +137,18 @@
   filter: none;
 }
 
+/* ── Fill propagation dans navset_hidden ─────────────────── */
+
+/* Le .tab-content de navset_hidden est marqué fill via bindFillRole() en R,
+   mais les .tab-pane internes ne le sont pas — on les force ici via l'ID
+   fixe #hl__content que bslibHL contrôle. */
+#hl__content > .tab-pane.active {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
 /* ── Header ──────────────────────────────────────────────── */
 
 .hl-header-wrapper {

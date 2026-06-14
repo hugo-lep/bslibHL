@@ -83,7 +83,7 @@ build_nav_panels <- function(nav_items) {
         value = item$value,
         htmltools::div(
           class = "html-fill-container html-fill-item",
-          style = "height: 100%; overflow-y: auto;",
+          style = "overflow-y: auto; min-height: 0;",
           do.call(htmltools::tagList, item$content)
         )
       )
@@ -94,7 +94,7 @@ build_nav_panels <- function(nav_items) {
           value = child$value,
           htmltools::div(
             class = "html-fill-container html-fill-item",
-            style = "height: 100%; overflow-y: auto;",
+            style = "overflow-y: auto; min-height: 0;",
             do.call(htmltools::tagList, child$content)
           )
         )

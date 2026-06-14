@@ -103,6 +103,9 @@ page_sidebarHL <- function(
     bslib::navset_hidden,
     c(nav_panels, list(id = "hl__content", selected = selected))
   )
+  # navset_hidden ne propage pas les rôles fill — on les ajoute manuellement
+  # pour que le .tab-content occupe toute la hauteur de la zone principale
+  content_area <- htmltools::bindFillRole(content_area, item = TRUE, container = TRUE)
 
   # Titre de la fenêtre
   win_title <- if (is.na(window_title) && is.character(title)) title else window_title

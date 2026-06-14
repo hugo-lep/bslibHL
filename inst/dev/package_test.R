@@ -2,7 +2,7 @@ library(devtools)
 
 load_all()
 #document()
-renv::snapshot()
+#renv::snapshot()
 #check()
 
 # ── Thème ──────────────────────────────────────────────────────────────────
