@@ -10,7 +10,7 @@ page_sidebarHL(
   theme = NULL,
   sidebar_width = 250,
   selected = NULL,
-  sidebar_open = "always",
+  sidebar_open = "open",
   window_title = NA,
   protegR2_compat = FALSE,
   nav_bg = NULL,

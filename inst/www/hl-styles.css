@@ -163,10 +163,14 @@
 }
 
 /* 3. les enfants html-fill-item du .tab-pane remplissent leur parent
-      (bslib ne l'active que si le parent a la classe html-fill-container) */
+      (bslib ne l'active que si le parent a la classe html-fill-container)
+      overflow-x: hidden : quand overflow-y est "auto" (inline style de build_nav_panels),
+      le navigateur force automatiquement overflow-x à "auto" aussi (spec CSS) —
+      on le force à hidden pour supprimer la scrollbar horizontale. */
 .tabbable.html-fill-container > .tab-content > .tab-pane.active > .html-fill-item {
   flex: 1 1 auto;
   min-height: 0;
+  overflow-x: hidden;
 }
 
 /* ── Header ──────────────────────────────────────────────── */
